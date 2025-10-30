@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube Dual Subtitles
 // @namespace    http://tampermonkey.net/
-// @version      2.2.13
+// @version      2.4
 // @license      Unlicense
 // @description  Add DUAL SUBStitles to YouTube videos
 // @author       Jim Chen
@@ -155,13 +155,14 @@
             .playerCaptionsTracklistRenderer.captionTracks[0].languageCode;
 
           if (languageCode) {
-            if (languageCode.includes("de")) {
+            // Modified: Now accepts both German (de) and Spanish (es)
+            if (languageCode.includes("de") || languageCode.includes("es")) {
               console.log("[DUAL SUBS] Language check passed:", languageCode);
               clearInterval(intervalId);
               resolve(true);
               return;
             } else {
-              console.log("[DUAL SUBS] Language code does not contain 'de':", languageCode);
+              console.log("[DUAL SUBS] Language code does not contain 'de' or 'es':", languageCode);
               clearInterval(intervalId);
               resolve(false);
               return;
