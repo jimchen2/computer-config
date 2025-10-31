@@ -145,39 +145,50 @@
     return new Promise((resolve) => {
       let attempts = 0;
       const maxAttempts = 5;
+      const checkInterval = 2000;
 
       const intervalId = setInterval(() => {
         attempts++;
         console.log(`[DUAL SUBS] Language check attempt ${attempts}/${maxAttempts}`);
 
         try {
-          const languageCode = document.querySelector("#movie_player").getPlayerResponse().captions
-            .playerCaptionsTracklistRenderer.captionTracks[0].languageCode;
+          const captionTracks = document.querySelector("#movie_player")?.getPlayerResponse()?.captions
+            ?.playerCaptionsTracklistRenderer?.captionTracks;
+          console.log("[DUAL SUBS]", captionTracks);
 
-          if (languageCode) {
-            // Modified: Now accepts both German (de) and Spanish (es)
-            if (languageCode.includes("de") || languageCode.includes("es")) {
-              console.log("[DUAL SUBS] Language check passed:", languageCode);
+          // Check if the caption track list exists and has content
+          if (captionTracks && captionTracks.length > 0) {
+            const hasTargetLanguage = captionTracks.some(
+              (track) => track.languageCode && (track.languageCode.includes("de") || track.languageCode.includes("es"))
+            );
+
+            if (hasTargetLanguage) {
+              const foundLanguages = captionTracks
+                .filter(
+                  (track) =>
+                    track.languageCode && (track.languageCode.includes("de") || track.languageCode.includes("es"))
+                )
+                .map((track) => track.languageCode);
+              console.log("[DUAL SUBS] Language check passed. Found:", foundLanguages.join(", "));
               clearInterval(intervalId);
               resolve(true);
-              return;
+              return; // Exit the callback
             } else {
-              console.log("[DUAL SUBS] Language code does not contain 'de' or 'es':", languageCode);
-              clearInterval(intervalId);
-              resolve(false);
-              return;
+              console.log("[DUAL SUBS] Target languages not yet available. Retrying...");
             }
           }
         } catch (error) {
-          console.log("[DUAL SUBS] Language check failed with error:", error);
+          // Player response might not be ready. We'll just let it try again.
+          console.log("[DUAL SUBS] Player data not available yet. Retrying...");
         }
 
+        // FAILURE: If we've reached max attempts, stop and resolve false
         if (attempts >= maxAttempts) {
-          console.log("[DUAL SUBS] Language check failed after all attempts. Skipping.");
+          console.log("[DUAL SUBS] Language check failed after all attempts. Target languages not found.");
           clearInterval(intervalId);
           resolve(false);
         }
-      }, 1000);
+      }, checkInterval); // Use the variable for the interval
     });
   }
 
