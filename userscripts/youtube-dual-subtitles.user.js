@@ -1,13 +1,15 @@
 // ==UserScript==
 // @name         YouTube Dual Subtitles
 // @namespace    http://tampermonkey.net/
-// @version      2.5
+// @version      2.4
 // @license      Unlicense
 // @description  Add DUAL SUBStitles to YouTube videos
 // @author       Jim Chen
 // @homepage     https://jimchen.me
 // @match        https://*.youtube.com/*
 // @run-at       document-idle
+// @downloadURL https://update.greasyfork.org/scripts/550370/YouTube%20Dual%20Subtitles.user.js
+// @updateURL https://update.greasyfork.org/scripts/550370/YouTube%20Dual%20Subtitles.meta.js
 // ==/UserScript==
 (function () {
   const isMobile = location.href.startsWith("https://m.youtube.com");
@@ -145,50 +147,39 @@
     return new Promise((resolve) => {
       let attempts = 0;
       const maxAttempts = 5;
-      const checkInterval = 2000;
 
       const intervalId = setInterval(() => {
         attempts++;
         console.log(`[DUAL SUBS] Language check attempt ${attempts}/${maxAttempts}`);
 
         try {
-          const captionTracks = document.querySelector("#movie_player")?.getPlayerResponse()?.captions
-            ?.playerCaptionsTracklistRenderer?.captionTracks;
-          console.log("[DUAL SUBS]", captionTracks);
+          const languageCode = document.querySelector("#movie_player").getPlayerResponse().captions
+            .playerCaptionsTracklistRenderer.captionTracks[0].languageCode;
 
-          // Check if the caption track list exists and has content
-          if (captionTracks && captionTracks.length > 0) {
-            const hasTargetLanguage = captionTracks.some(
-              (track) => track.languageCode && (track.languageCode.includes("de") || track.languageCode.includes("es"))
-            );
-
-            if (hasTargetLanguage) {
-              const foundLanguages = captionTracks
-                .filter(
-                  (track) =>
-                    track.languageCode && (track.languageCode.includes("de") || track.languageCode.includes("es"))
-                )
-                .map((track) => track.languageCode);
-              console.log("[DUAL SUBS] Language check passed. Found:", foundLanguages.join(", "));
+          if (languageCode) {
+            // Modified: Now accepts both German (de) and Spanish (es)
+            if (languageCode.includes("de") || languageCode.includes("es")) {
+              console.log("[DUAL SUBS] Language check passed:", languageCode);
               clearInterval(intervalId);
               resolve(true);
-              return; // Exit the callback
+              return;
             } else {
-              console.log("[DUAL SUBS] Target languages not yet available. Retrying...");
+              console.log("[DUAL SUBS] Language code does not contain 'de' or 'es':", languageCode);
+              clearInterval(intervalId);
+              resolve(false);
+              return;
             }
           }
         } catch (error) {
-          // Player response might not be ready. We'll just let it try again.
-          console.log("[DUAL SUBS] Player data not available yet. Retrying...");
+          console.log("[DUAL SUBS] Language check failed with error:", error);
         }
 
-        // FAILURE: If we've reached max attempts, stop and resolve false
         if (attempts >= maxAttempts) {
-          console.log("[DUAL SUBS] Language check failed after all attempts. Target languages not found.");
+          console.log("[DUAL SUBS] Language check failed after all attempts. Skipping.");
           clearInterval(intervalId);
           resolve(false);
         }
-      }, checkInterval); // Use the variable for the interval
+      }, 1000);
     });
   }
 
