@@ -8,8 +8,8 @@
 // @homepage     https://jimchen.me
 // @match        https://*.youtube.com/*
 // @run-at       document-idle
-// @downloadURL https://update.greasyfork.org/scripts/550370/YouTube%20Dual%20Subtitles.user.js
-// @updateURL https://update.greasyfork.org/scripts/550370/YouTube%20Dual%20Subtitles.meta.js
+// @updateURL    https://github.com/jimchen2/computer-config/raw/refs/heads/main/userscripts/youtube-dual-subtitles.user.js
+// @downloadURL  https://github.com/jimchen2/computer-config/raw/refs/heads/main/userscripts/youtube-dual-subtitles.user.js
 // ==/UserScript==
 (function () {
   const isMobile = location.href.startsWith("https://m.youtube.com");

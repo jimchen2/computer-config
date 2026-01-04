@@ -13,8 +13,8 @@
 // @match        *://*.matchtv.ru/*
 // @match        file://*/*
 // @run-at       document-idle
-// @downloadURL https://update.greasyfork.org/scripts/550371/Video%20Sites%20Shortcuts.user.js
-// @updateURL https://update.greasyfork.org/scripts/550371/Video%20Sites%20Shortcuts.meta.js
+// @updateURL    https://github.com/jimchen2/computer-config/raw/refs/heads/main/userscripts/video-sites-shortcuts.user.js
+// @downloadURL  https://github.com/jimchen2/computer-config/raw/refs/heads/main/userscripts/video-sites-shortcuts.user.js
 // ==/UserScript==
 (function () {
   document.addEventListener("keydown", function (e) {
