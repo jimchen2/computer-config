@@ -1,10 +1,3 @@
-Instagram download
-
-```
-source ~/.venv/bin/activate.fish
-instaloader -- -DQSGIYtkh2C
-```
-
 # Userscripts
 
 - [website-redirector.user.js](https://github.com/jimchen2/computer-config/raw/refs/heads/main/userscripts/website-redirector.user.js)
