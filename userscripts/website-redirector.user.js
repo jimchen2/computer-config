@@ -1,13 +1,14 @@
 // ==UserScript==
 // @name         Website Redirector & Blocker
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @license      Unlicense
-// @description  Combines Old Reddit redirect, Site Blocking, and Cyrillic Google to Yandex redirection.
+// @description  Combines Old Reddit redirect, Site Blocking (including Bilibili), and Cyrillic Google to Yandex redirection.
 // @author       Jim Chen
 // @match        *://*.reddit.com/*
 // @match        *://*.huaren.us/*
 // @match        *://*.tieba.baidu.com/*
+// @match        *://*.bilibili.com/*
 // @match        *://*.zombsroyale.io/*
 // @match        *://*.generals.io/*
 // @match        https://www.google.com/search*
@@ -43,7 +44,7 @@
 
         const urlParams = new URLSearchParams(window.location.search);
         const query = urlParams.get('q');
-        
+
         // Check for Cyrillic characters (Unicode block 0400-04FF)
         if (query && /[\u0400-\u04FF]/.test(query)) {
             window.location.replace(`https://yandex.ru/search/?text=${encodeURIComponent(query)}`);
@@ -56,6 +57,7 @@
     const blockedDomains = [
         "huaren.us",
         "tieba.baidu.com",
+        "bilibili.com",
         "zombsroyale.io",
         "generals.io"
     ];
