@@ -6,7 +6,7 @@
 // @author       Jim Chen
 // @match        *://*.reddit.com/*
 // @match        *://*.huaren.us/*
-// @match        *://*.tieba.baidu.com/*
+// @match        *://*.baidu.com/*
 // @match        *://*.bilibili.com/*
 // @match        *://*.zombsroyale.io/*
 // @grant        window.close
