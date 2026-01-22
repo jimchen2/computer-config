@@ -69,12 +69,10 @@
         buttonContainer.style.marginTop = '30px';
         buttonContainer.style.display = 'none'; // Hidden initially
         
-        // --- BUTTON LAYOUT CHANGE ---
         buttonContainer.style.flexDirection = 'column'; // Stack vertically
         buttonContainer.style.gap = '15px'; 
         buttonContainer.style.width = '80%'; // Take up 80% of screen width
         buttonContainer.style.maxWidth = '300px'; // But don't get bigger than 300px
-        // ----------------------------
 
         const btnContinue = document.createElement('button');
         btnContinue.innerText = "Continue Browsing";
@@ -152,10 +150,31 @@
         }, 1000);
     }
 
-    // Initialize
-    const existing = document.getElementById('prod-overlay');
-    if (existing) existing.remove();
-    
-    createOverlay();
+    // Initialize - FIXED: Wait for body to be available
+    function initialize() {
+        const existing = document.getElementById('prod-overlay');
+        if (existing) existing.remove();
+        
+        createOverlay();
+    }
+
+    // Wait for the body element to be available
+    if (document.body) {
+        // Body already exists
+        initialize();
+    } else {
+        // Wait for DOMContentLoaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initialize);
+        } else {
+            // Fallback: poll for body
+            const checkBody = setInterval(() => {
+                if (document.body) {
+                    clearInterval(checkBody);
+                    initialize();
+                }
+            }, 10);
+        }
+    }
 
 })();
