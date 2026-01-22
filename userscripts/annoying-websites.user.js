@@ -10,7 +10,7 @@
 // @match        *://*.bilibili.com/*
 // @match        *://*.zombsroyale.io/*
 // @grant        window.close
-// @run-at       document-start
+// @run-at       document-end
 // @updateURL    https://github.com/jimchen2/computer-config/raw/refs/heads/main/userscripts/annoying-websites.user.js
 // @downloadURL  https://github.com/jimchen2/computer-config/raw/refs/heads/main/userscripts/annoying-websites.user.js
 // ==/UserScript==
@@ -91,7 +91,6 @@
             window.location.href = "about:blank";
         };
 
-        // Added Close button first, then Continue below it
         buttonContainer.appendChild(btnClose);
         buttonContainer.appendChild(btnContinue);
 
@@ -110,7 +109,6 @@
             if (secondsLeft <= 0) {
                 clearInterval(countdown);
                 timerDisplay.innerText = "Time's up.";
-                // Change display to flex so the column layout works
                 buttonContainer.style.display = 'flex'; 
             }
         }, 1000);
@@ -125,7 +123,7 @@
         btn.style.color = 'white';
         btn.style.border = 'none';
         btn.style.borderRadius = '8px';
-        btn.style.width = '100%'; // Make button fill the container width
+        btn.style.width = '100%';
     }
 
     function startMainTimer() {
@@ -138,7 +136,6 @@
         mainTimerInterval = setInterval(() => {
             timeRemaining--;
 
-            // Print to console based on variable
             if (SHOW_TIMER_IN_CONSOLE) {
                 console.log(`[Annoy] Time remaining: ${timeRemaining}s`);
             }
@@ -150,31 +147,10 @@
         }, 1000);
     }
 
-    // Initialize - FIXED: Wait for body to be available
-    function initialize() {
-        const existing = document.getElementById('prod-overlay');
-        if (existing) existing.remove();
-        
-        createOverlay();
-    }
-
-    // Wait for the body element to be available
-    if (document.body) {
-        // Body already exists
-        initialize();
-    } else {
-        // Wait for DOMContentLoaded
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initialize);
-        } else {
-            // Fallback: poll for body
-            const checkBody = setInterval(() => {
-                if (document.body) {
-                    clearInterval(checkBody);
-                    initialize();
-                }
-            }, 10);
-        }
-    }
+    // Initialize
+    const existing = document.getElementById('prod-overlay');
+    if (existing) existing.remove();
+    
+    createOverlay();
 
 })();
