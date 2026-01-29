@@ -1,3 +1,4 @@
+16 inches, amd u series or a long lasting cpu/battery
 # Userscripts
 
 <!-- - [video-sites-shortcuts.user.js](https://github.com/jimchen2/computer-config/raw/refs/heads/main/userscripts/video-sites-shortcuts.user.js) -->
