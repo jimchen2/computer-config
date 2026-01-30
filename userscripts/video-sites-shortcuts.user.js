@@ -1,13 +1,14 @@
 // ==UserScript==
 // @name         Video Sites Shortcuts
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @license      Unlicense
 // @description  Add keyboard shortcuts to various video sites
 // @author       Jim Chen
 // @homepage     https://jimchen.me
 // @match        *://*.bilibili.com/*
 // @match        *://vkvideo.ru/*
+// @match        *://vk.com/*
 // @match        *://rutube.ru/*
 // @match        *://*.1tv.ru/*
 // @match        *://*.matchtv.ru/*
