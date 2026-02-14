@@ -13,7 +13,7 @@
 // ==/UserScript==
 (function () {
   // Inject custom subtitle styling
-  const style = document.createElement('style');
+  const style = document.createElement("style");
   style.textContent = `
     video::cue {
       font-size: 150% !important;
@@ -160,18 +160,27 @@
         console.log(`[RU SUBS] Language check attempt ${attempts}/${maxAttempts}`);
 
         try {
-          const languageCode = document.querySelector("#movie_player").getPlayerResponse().captions
-            .playerCaptionsTracklistRenderer.captionTracks[0].languageCode;
+          const captionTracks = document.querySelector("#movie_player").getPlayerResponse().captions.playerCaptionsTracklistRenderer.captionTracks;
 
-          if (languageCode) {
-            // --- MODIFICATION: Only check for Russian ('ru') ---
-            if (languageCode.includes("ru")) {
-              console.log("[RU SUBS] Language check passed:", languageCode);
+          if (captionTracks && captionTracks.length > 0) {
+            // Check all caption tracks for Russian
+            let foundRussian = false;
+            for (let i = 0; i < captionTracks.length; i++) {
+              const languageCode = captionTracks[i].languageCode;
+              console.log(`[RU SUBS] Checking track ${i}: ${languageCode}`);
+              if (languageCode && languageCode.includes("ru")) {
+                console.log(`[RU SUBS] Language check passed: found 'ru' in track ${i} (${languageCode})`);
+                foundRussian = true;
+                break;
+              }
+            }
+
+            if (foundRussian) {
               clearInterval(intervalId);
               resolve(true);
               return;
             } else {
-              console.log("[RU SUBS] Language code does not contain 'ru':", languageCode);
+              console.log("[RU SUBS] No tracks contain 'ru'");
               clearInterval(intervalId);
               resolve(false);
               return;
@@ -250,10 +259,7 @@
       let subtitleData = (await response.text()).replaceAll("align:start position:0%", "");
 
       // Modify VTT data to position subtitles higher (85% down from top, about 2 lines up from bottom)
-      subtitleData = subtitleData.replace(
-        /(\d{2}:\d{2}:\d{2}\.\d{3}\s+-->\s+\d{2}:\d{2}:\d{2}\.\d{3})/g,
-        '$1 line:80%'
-      );
+      subtitleData = subtitleData.replace(/(\d{2}:\d{2}:\d{2}\.\d{3}\s+-->\s+\d{2}:\d{2}:\d{2}\.\d{3})/g, "$1 line:80%");
 
       const track = document.createElement("track");
       track.src = "data:text/vtt," + encodeURIComponent(subtitleData);
