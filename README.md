@@ -4,3 +4,15 @@
 - [annoying-websites.user.js](https://github.com/jimchen2/computer-config/raw/refs/heads/main/userscripts/annoying-websites.user.js)
 - [youtube-subtitles-only.user.js](https://github.com/jimchen2/computer-config/raw/refs/heads/main/userscripts/youtube-subtitles-only.user.js)
 <!-- - [dual-subtitles.user.js](https://github.com/jimchen2/computer-config/raw/refs/heads/main/userscripts/dual-subtitles.user.js) -->
+
+## ibus
+
+```
+rm -rf ~/.local/share/ibus-typing-booster/
+rm -rf ~/.cache/ibus/libpinyin/
+ibus reset-config
+gsettings set com.github.libpinyin.ibus-libpinyin.libpinyin remember-every-input false
+gsettings set com.github.libpinyin.ibus-libpinyin.libpinyin dynamic-adjust false
+gsettings set com.github.libpinyin.ibus-libpinyin.libpinyin clear-user-data true
+ibus restart
+```
