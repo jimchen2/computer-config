@@ -2,7 +2,7 @@ jimchen.me
 
 - Blog: [jimchen.me](https://jimchen.me/) (English, Chinese, Russian)
 - Profile: [Github](https://github.com/jimchen2), [LinkedIn](https://www.linkedin.com/in/jim-chen-588002255/)
-- Social Media: [Telegram](https://t.me/Jimchen4214), [Instagaram](https://www.instagram.com/jimchen_1), [WeChat](https://jimchen.me/weixin.jpg), [YouTube](https://www.youtube.com/@jimchen4214), [TikTok](https://www.tiktok.com/@jimchen.me)
+- Social Media: [Telegram](https://t.me/Jimchen4214), [Instagram](https://www.instagram.com/jimchen_1), [WeChat](https://jimchen.me/weixin.jpg), [YouTube](https://www.youtube.com/@jimchen4214), [TikTok](https://www.tiktok.com/@jimchen.me)
 
 ---
 
