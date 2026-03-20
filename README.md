@@ -1,5 +1,3 @@
-# Projects & Builds
-
 ### YouTube Dual Subtitles
 **Timeline:** Feb 2025  
 [Source Code](https://github.com/jimchen2/youtube-dual-subtitles)
