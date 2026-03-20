@@ -72,3 +72,8 @@ gsettings set com.github.libpinyin.ibus-libpinyin.libpinyin dynamic-adjust false
 gsettings set com.github.libpinyin.ibus-libpinyin.libpinyin clear-user-data true
 ibus restart
 ```
+
+---
+
+- Remove Russian
+- Remove TikTok
