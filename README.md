@@ -17,10 +17,6 @@ jimchen.me
 - [youtube-subtitles-only.user.js](https://github.com/jimchen2/computer-config/raw/refs/heads/main/userscripts/youtube-subtitles-only.user.js)
 <!-- - [dual-subtitles.user.js](https://github.com/jimchen2/computer-config/raw/refs/heads/main/userscripts/dual-subtitles.user.js) -->
 
-### Telegram
-
-- [telegram-bot](https://github.com/jimchen2/telegram-bot)
-
 ### ibus
 
 ```
