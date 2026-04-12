@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         Annoying Websites
 // @namespace    http://tampermonkey.net/
-// @version      1.3
+// @version      1.4
 // @description  Annoy the Annoying Websites.
 // @author       Jim Chen
-// @match        *://*.reddit.com/*
+// @match        *://*.1point3acres.com/*
 // @match        *://*.huaren.us/*
 // @match        *://*.baidu.com/*
 // @match        *://*.bilibili.com/*
