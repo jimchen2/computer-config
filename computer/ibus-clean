@@ -1,0 +1,9 @@
+```
+rm -rf ~/.local/share/ibus-typing-booster/
+rm -rf ~/.cache/ibus/libpinyin/
+ibus reset-config
+gsettings set com.github.libpinyin.ibus-libpinyin.libpinyin remember-every-input false
+gsettings set com.github.libpinyin.ibus-libpinyin.libpinyin dynamic-adjust false
+gsettings set com.github.libpinyin.ibus-libpinyin.libpinyin clear-user-data true
+ibus restart
+```
